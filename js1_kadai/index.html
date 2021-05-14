@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+    <title>ポケモンじゃんけん</title>
+</head>
+<body>
+    <script src="js/js.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <div id="top">
+        <h1 class="h1-color"><img class="logo-img" src="img/logo.png" alt=""></h1>
+        <button id="start">スタート/ポケモン入れ替え</button>
+    </div>
+    <div id="main">
+        <div class="main-area">
+            <div class="opponent-area">
+                <p class="text Otext">あいてのポケモン</p>
+                <p class="opponent-img"></p>
+                <p class="choice opponent-choice"><span class="Omaker"></span></p>
+            </div>
+            <div class="vs-area">
+                <P class="vs text"><img class="vs-img" src="img/vs.png" alt=""></P>
+            </div>
+            <div class="player-area">
+                <div class="player-result-container">
+                    <p class="text Ptext">プレイヤーのポケモン</p>
+                    <p class="choice player-choice"><span class="Pmaker"></span></p>
+                    <p class="result player-result"></p>
+                </div>
+                <div class="janken-container">
+                    <ul class="janken-ul Pjanken-ul">
+                        <li>
+                            <div class="janken Pjanken honoo"><img class="Ppokemon-img" src="img/honoo.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken mizu"><img class="Ppokemon-img" src="img/mizu.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken denki"><img class="Ppokemon-img" src="img/denki.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken koori"><img class="Ppokemon-img" src="img/koori.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken kakutou"><img class="Ppokemon-img" src="img/kakutou.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken jimen"><img class="Ppokemon-img" src="img/jimen.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken esupa"><img class="Ppokemon-img" src="img/esupa.gif" alt=""></div>
+                        </li>
+                        <li>
+                            <div class="janken Pjanken mushi"><img class="Ppokemon-img" src="img/mushi.gif" alt=""></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="score-area">
+        <div class="win score">勝ち：<span class="point_win">0</span></div>
+        <div class="draw score">引き分け：<span class="point_draw">0</span></div>
+        <div class="lose score">負け：<span class="point_lose">0</span></div>
+    </div>
+
+    <audio id="battle" preload="auto" loop>
+        <source src="sound/battle.wav" type="audio/wav">
+    </audio>
+    <audio id="start-btn" preload="auto">
+        <source src="sound/click.wav" type="audio/wav">
+    </audio>
+    <audio id="batugun" preload="auto">
+        <source src="sound/batugun.wav" type="audio/wav">
+    </audio>
+    <audio id="attack" preload="auto">
+        <source src="sound/attack.wav" type="audio/wav">
+    </audio>
+    <audio id="imahitotu" preload="auto">
+        <source src="sound/imahitotu.wav" type="audio/wav">
+    </audio>
+  
+    <script>
+    $("#start").click(function() {
+        $(".janken,.setsumei").css("display", "block") 
+        document.getElementById("start-btn").currentTime = 0;
+		document.getElementById("start-btn").play(); 
+        document.getElementById("battle").currentTime = 0;
+		document.getElementById("battle").play(); 
+    })
+    $("#start").click(function() {
+        $(".choice,.result,.text,.opponent-img").css("display", "none")
+    })
+    $(".janken").click(function() {
+        $(".choice,.result,.text,.opponent-img").css("display", "block")
+    })
+    $("#start").click(function() {
+        $('.Pjanken-ul li').hide();
+        var items = $('.Pjanken-ul li').get().sort(function() {
+            return Math.round(Math.random()) - 0.5;
+        }).slice(0, 5);
+        $(items).show();
+    })
+    var pointWin=0,pointDraw=0,pointLose=0;
+    // 1=ほのお,2=みず,3=でんき,4=こおり,5=かくとう,6=じめん,7=エスパー,8=むし
+    $(".honoo").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='ほのおタイプ！';
+            Presult='引き分け';
+            Ochoice='ほのおタイプ！';
+            Oimg='<img class="Oimg" src="img/honoo.gif" alt="">';
+            $(".player-result").css("color", "forestgreen");
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==2){
+            Pchoice='ほのおタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='みずタイプ！';
+            Oimg='<img class="Oimg" src="img/mizu.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==3){
+            Pchoice='ほのおタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='むしタイプ！';
+            Oimg='<img class="Oimg" src="img/mushi.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);     
+    });
+    $(".mizu").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='みずタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='ほのおタイプ！';
+            Oimg='<img class="Oimg" src="img/honoo.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='みずタイプ！';
+            Presult='引き分け';
+            Ochoice='みずタイプ！';
+            Oimg='<img class="Oimg" src="img/mizu.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='みずタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='でんきタイプ！';
+            Oimg='<img class="Oimg" src="img/denki.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);   
+    });
+       $(".denki").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='でんきタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='みずタイプ！';
+            Oimg='<img class="Oimg" src="img/mizu.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='でんきタイプ！';
+            Presult='引き分け';
+            Ochoice='でんきタイプ！';
+            Oimg='<img class="Oimg" src="img/denki.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='でんきタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='じめんタイプ！';
+            Oimg='<img class="Oimg" src="img/jimen.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);       
+    });
+
+    $(".koori").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='こおりタイプ！';
+            Presult='引き分け';
+            Ochoice='こおりタイプ！';
+            Oimg='<img class="Oimg" src="img/koori.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==2){
+            Pchoice='こおりタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='かくとうタイプ！';
+            Oimg='<img class="Oimg" src="img/kakutou.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==3){
+            Pchoice='こおりタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='じめんタイプ！';
+            Oimg='<img class="Oimg" src="img/jimen.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);        
+    });
+
+    $(".kakutou").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='かくとうタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='こおりタイプ！';
+            Oimg='<img class="Oimg" src="img/koori.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='かくとうタイプ！';
+            Presult='引き分け';
+            Ochoice='かくとうタイプ！';
+            Oimg='<img class="Oimg" src="img/kakutou.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='かくとうタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='エスパータイプ！';
+            Oimg='<img class="Oimg" src="img/esupa.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);      
+    });
+    $(".jimen").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='じめんタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='でんきタイプ！';
+            Oimg='<img class="Oimg" src="img/denki.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='じめんタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='こおりタイプ！';
+            Oimg='<img class="Oimg" src="img/koori.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==3){
+            Pchoice='じめんタイプ！';
+            Presult='引き分け';
+            Ochoice='じめんタイプ！';
+            Oimg='<img class="Oimg" src="img/jimen.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);      
+    });
+    $(".esupa").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='エスパータイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='かくとうタイプ！';
+            Oimg='<img class="Oimg" src="img/kakutou.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='エスパータイプ！';
+            Presult='引き分け';
+            Ochoice='エスパータイプ！';
+            Oimg='<img class="Oimg" src="img/esupa.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='エスパータイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='むしタイプ！';
+            Oimg='<img class="Oimg" src="img/mushi.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);        
+    });
+    $(".mushi").on("click",function(){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='むしタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='ほのおタイプ！';
+            Oimg='<img class="Oimg" src="img/honoo.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==2){
+            Pchoice='むしタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='エスパータイプ！';
+            Oimg='<img class="Oimg" src="img/esupa.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==3){
+            Pchoice='むしタイプ！';
+            Presult='引き分け';
+            Ochoice='むしタイプ！';
+            Oimg='<img class="Oimg" src="img/mushi.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);       
+    });
+    </script>
+</body>
+</html>
