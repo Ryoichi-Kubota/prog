@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+    <title>ポケモンじゃんけん</title>
+    <style id='Stylesheet' type='text/css'></style>
+</head>
+<body>
+    <script src="js/js.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <div id="top">
+        <h1 class="h1-color"><img class="logo-img" src="img/logo.png" alt=""></h1>
+        <button id="start"><img src="img/start.png" class="start-btn" alt=""></button>
+    </div>
+
+    <div id="main">
+            <div id="score-area">
+            <div class="name-head"><a class="name-head-a">プレイヤー名</a></div>
+            <div class="input-container"><input class="input-name" type="text"></input></div>
+            <div class="attack-count-head"><a class="attack-count-head-a">こうげき回数</a></div>
+            <div class="attack-count-text">残　り　： <span class="attack-count">5</span></div>
+            <div class="score-head"><a class="score-head-a">バトルの結果</a></div>
+            <div class="win score">勝　ち　： <span class="point_win win-color">0</span></div>
+            <div class="draw score">引き分け： <span class="point_draw draw-color">0</span></div>
+            <div class="lose score">負　け　： <span class="point_lose lose-color">0</span></div>    
+        </div>
+        <div id="battle-area">
+            <div class="battle-container">
+                <div class="opponent-area">
+                    <p class="text Otext">あいてのポケモン</p>
+                    <p class="opponent-img"></p>
+                    <p class="choice opponent-choice"><span class="Omaker"></span></p>
+                </div>
+                <div class="vs-area">
+                    <P class="vs text"><img class="vs-img" src="img/vs.png" alt=""></P>
+                </div>
+                <div class="player-area">
+                    <div class="player-result-container">
+                        <p class="text Ptext">プレイヤーのポケモン</p>
+                        <p class="choice player-choice"><span class="Pmaker"></span></p>
+                        <p class="result player-result"></p>
+                    </div>
+                    <div class="janken-container">
+                        <ul class="janken-ul Pjanken-ul">
+                            <li>
+                                <div class="janken Pjanken honoo"><img class="Ppokemon-img" src="img/charizard.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken mizu"><img class="Ppokemon-img" src="img/suicune.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken denki"><img class="Ppokemon-img" src="img/zapdos.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken koori"><img class="Ppokemon-img" src="img/kyurem.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken kakutou"><img class="Ppokemon-img" src="img/lucario.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken jimen"><img class="Ppokemon-img" src="img/garchomp-mega.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken esupa"><img class="Ppokemon-img" src="img/mew.gif" alt=""></div>
+                            </li>
+                            <li>
+                                <div class="janken Pjanken mushi"><img class="Ppokemon-img" src="img/scizor.gif" alt=""></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="record-area">
+            <div class="record-container">
+                <div class="record-head"><a class="record-head-a">バトルりれき 1つ前</a></div>
+                <div class="record-name Rname1"></div>
+                <div class="record-point-container">
+                    <div class="record-point">勝ち：<span class="record-win win-color Rwin1"></span></div>
+                    <div class="record-point rpd">引き分け：<span class="record-draw draw-color Rdraw1"></span></div>
+                    <div class="record-point">負け：<span class="record-lose lose-color Rlose1"></span></div>
+                </div>
+                <div class="record-head"><a class="record-head-a">バトルりれき 2つ前</a></div>
+                <div class="record-name Rname2"></div>
+                <div class="record-point-container">
+                    <div class="record-point">勝ち：<span class="record-win win-color Rwin2"></span></div>
+                    <div class="record-point rpd">引き分け：<span class="record-draw draw-color Rdraw2"></span></div>
+                    <div class="record-point">負け：<span class="record-lose lose-color Rlose2"></span></div>
+                </div>
+                <div class="record-head"><a class="record-head-a">バトルりれき 3つ前</a></div>
+                <div class="record-name Rname3"></div>
+                <div class="record-point-container">
+                    <div class="record-point">勝ち：<span class="record-win win-color Rwin3"></span></div>
+                    <div class="record-point rpd">引き分け：<span class="record-draw draw-color Rdraw3"></span></div>
+                    <div class="record-point">負け：<span class="record-lose lose-color Rlose3"></span></div>
+                </div>
+                <div class="record-head"><a class="record-head-a">バトルりれき 4つ前</a></div>
+                <div class="record-name Rname4"></div>
+                <div class="record-point-container">
+                    <div class="record-point">勝ち：<span class="record-win win-color Rwin4"></span></div>
+                    <div class="record-point rpd">引き分け：<span class="record-draw draw-color Rdraw4"></span></div>
+                    <div class="record-point">負け：<span class="record-lose lose-color Rlose4"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bottom">
+        <button id="change">ポケモン入れ替え</button>
+        <div class="finish"><a class="finish-a">おしまい（ブラウザをリロードしてください）</a></div>
+    </div>
+
+    <audio id="battle" preload="auto" loop>
+        <source src="sound/battle.wav" type="audio/wav">
+    </audio>
+    <audio id="start-btn" preload="auto">
+        <source src="sound/click.wav" type="audio/wav">
+    </audio>
+    <audio id="batugun" preload="auto">
+        <source src="sound/batugun.wav" type="audio/wav">
+    </audio>
+    <audio id="attack" preload="auto">
+        <source src="sound/attack.wav" type="audio/wav">
+    </audio>
+    <audio id="imahitotu" preload="auto">
+        <source src="sound/imahitotu.wav" type="audio/wav">
+    </audio>
+  
+    <script>
+
+    $("#start").click(function() {
+        //startをクリックしたらmain-areaを表示
+        $(".janken,.setsumei").css("display", "block") 
+        document.getElementById("start-btn").currentTime = 0;
+		document.getElementById("start-btn").play(); 
+        document.getElementById("battle").currentTime = 0;
+		document.getElementById("battle").play(); 
+        //startをクリックしたらmain-areaのプレイヤーのポケモン以外を非表示
+         $(".choice,.result,.text,.opponent-img").css("display", "none")
+        //startをクリックしたらプレイヤーのポケモンをランダムに入れ替え
+         $('.Pjanken-ul li').hide();
+        var items = $('.Pjanken-ul li').get().sort(function() {
+            return Math.round(Math.random()) - 0.5;
+        }).slice(0, 5);
+        $(items).show();
+    })
+    $("#change").click(function() {
+        document.getElementById("start-btn").currentTime = 0;
+		document.getElementById("start-btn").play(); 
+        //startをクリックしたらプレイヤーのポケモンをランダムに入れ替え
+         $('.Pjanken-ul li').hide();
+        var items = $('.Pjanken-ul li').get().sort(function() {
+            return Math.round(Math.random()) - 0.5;
+        }).slice(0, 5);
+        $(items).show();
+    })
+    $(".janken").click(function() {
+        //プレイヤーのポケモンをクリックしたらテキスト、相手のポケモン、結果を表示
+        $(".choice,.result,.text,.opponent-img").css("display", "block")
+    })
+   
+    var pointWin=0,pointDraw=0,pointLose=0,attackCount=5;
+    
+    $(".honoo").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='ほのおタイプ！'; //プレイヤーのタイプ
+            Presult='引き分け'; //対戦結果
+            Ochoice='ほのおタイプ！'; //相手のタイプ
+            Oimg='<img class="Oimg" src="img/honoo.gif" alt="">'; //相手のポケモン画像
+            $(".player-result").css("color", "forestgreen"); //”対戦結果”のフォントカラー
+            $('.point_draw').text(++ pointDraw); //引き分けに+1
+            $('.attack-count').text(-- attackCount); //こうげき回数 残りを-1
+            //効果音を再生
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==2){
+            Pchoice='ほのおタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='みずタイプ！';
+            Oimg='<img class="Oimg" src="img/mizu.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose); //負けに+1
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==3){
+            Pchoice='ほのおタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='むしタイプ！';
+            Oimg='<img class="Oimg" src="img/mushi.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin); //勝ちに+1
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }    
+    });
+   
+    $(".mizu").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='みずタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='ほのおタイプ！';
+            Oimg='<img class="Oimg" src="img/honoo.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='みずタイプ！';
+            Presult='引き分け';
+            Ochoice='みずタイプ！';
+            Oimg='<img class="Oimg" src="img/mizu.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='みずタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='でんきタイプ！';
+            Oimg='<img class="Oimg" src="img/denki.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);   
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }    
+    });
+
+    $(".denki").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='でんきタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='みずタイプ！';
+            Oimg='<img class="Oimg" src="img/mizu.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='でんきタイプ！';
+            Presult='引き分け';
+            Ochoice='でんきタイプ！';
+            Oimg='<img class="Oimg" src="img/denki.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='でんきタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='じめんタイプ！';
+            Oimg='<img class="Oimg" src="img/jimen.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);   
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }    
+    });
+
+    $(".koori").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='こおりタイプ！';
+            Presult='引き分け';
+            Ochoice='こおりタイプ！';
+            Oimg='<img class="Oimg" src="img/koori.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==2){
+            Pchoice='こおりタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='かくとうタイプ！';
+            Oimg='<img class="Oimg" src="img/kakutou.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==3){
+            Pchoice='こおりタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='じめんタイプ！';
+            Oimg='<img class="Oimg" src="img/jimen.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);   
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }      
+    });
+
+    $(".kakutou").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='かくとうタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='こおりタイプ！';
+            Oimg='<img class="Oimg" src="img/koori.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='かくとうタイプ！';
+            Presult='引き分け';
+            Ochoice='かくとうタイプ！';
+            Oimg='<img class="Oimg" src="img/kakutou.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='かくとうタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='エスパータイプ！';
+            Oimg='<img class="Oimg" src="img/esupa.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);     
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }    
+    });
+
+    $(".jimen").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='じめんタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='でんきタイプ！';
+            Oimg='<img class="Oimg" src="img/denki.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='じめんタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='こおりタイプ！';
+            Oimg='<img class="Oimg" src="img/koori.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==3){
+            Pchoice='じめんタイプ！';
+            Presult='引き分け';
+            Ochoice='じめんタイプ！';
+            Oimg='<img class="Oimg" src="img/jimen.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);   
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }    
+    });
+    
+    $(".esupa").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='エスパータイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='かくとうタイプ！';
+            Oimg='<img class="Oimg" src="img/kakutou.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==2){
+            Pchoice='エスパータイプ！';
+            Presult='引き分け';
+            Ochoice='エスパータイプ！';
+            Oimg='<img class="Oimg" src="img/esupa.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        if(r==3){
+            Pchoice='エスパータイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='むしタイプ！';
+            Oimg='<img class="Oimg" src="img/mushi.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice); 
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }      
+    });
+
+    $(".mushi").on("click",function(){
+        if(attackCount>0){
+        const r = Math.ceil(Math.random()*3);
+        let Pchoice ="";
+        let Presult ="";
+        let Ochoice ="";
+        let Oimg="";
+        if(r==1){
+            Pchoice='むしタイプ！';
+            Presult='こうかは いまひとつだ... あなたの負け';
+            Ochoice='ほのおタイプ！';
+            Oimg='<img class="Oimg" src="img/honoo.gif" alt="">';
+            $(".player-result").css("color", "crimson")
+            $('.point_lose').text(++ pointLose);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("imahitotu").currentTime = 0;
+		    document.getElementById("imahitotu").play();
+        }
+        if(r==2){
+            Pchoice='むしタイプ！';
+            Presult='こうかは ばつぐんだ！あなたの勝ち!!';
+            Ochoice='エスパータイプ！';
+            Oimg='<img class="Oimg" src="img/esupa.gif" alt="">';
+            $(".player-result").css("color", "royalblue")
+            $('.point_win').text(++ pointWin);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("batugun").currentTime = 0;
+		    document.getElementById("batugun").play();
+        }
+        if(r==3){
+            Pchoice='むしタイプ！';
+            Presult='引き分け';
+            Ochoice='むしタイプ！';
+            Oimg='<img class="Oimg" src="img/mushi.gif" alt="">';
+            $(".player-result").css("color", "forestgreen")
+            $('.point_draw').text(++ pointDraw);
+            $('.attack-count').text(-- attackCount);
+            document.getElementById("attack").currentTime = 0;
+		    document.getElementById("attack").play();
+        }
+        $('.opponent-img').html(Oimg);
+        $(".Pmaker").html(Pchoice);
+        $(".player-result").html(Presult);
+        $(".Omaker").html(Ochoice);  
+        }
+        if(attackCount==0){
+            const inputName = $("input").val(); //inputの値を定数namesに代入
+            recordData =[]; //空の配列を用意
+            let record0 = [inputName,pointWin,pointDraw,pointLose]; //今回の結果を配列record0に追加
+            recordData.push(record0,readRecord[0],readRecord[1],readRecord[2],readRecord[3]); //空の配列に今回の結果と過去4回の履歴を追加
+            localStorage.setItem("key",JSON.stringify(recordData)); //JSON形式でlocalStorageに保存
+            $("#change").css("display", "none");
+            $("#start").prop("disabled",true); //スタートボタンを非活性
+            $(".janken").css("box-shadow", "none");
+            $("#Stylesheet").html('.janken:active{margin-top:10px;}');
+            $(".finish").fadeIn(700);
+        }    
+    });
+
+    const keyRecord = localStorage.key(0); //localStorageの1番目のデータを取得
+    let readRecord = JSON.parse(localStorage.getItem(keyRecord)); //JSON形式からオブジェクトに変換
+    $(".Rname1").text(readRecord[0][0]); //直近の結果を履歴1に表示
+    $(".Rwin1").text(readRecord[0][1]); 
+    $(".Rdraw1").text(readRecord[0][2]);
+    $(".Rlose1").text(readRecord[0][3]);
+    $(".Rname2").text(readRecord[1][0]); //２つ前の結果を表示
+    $(".Rwin2").text(readRecord[1][1]); 
+    $(".Rdraw2").text(readRecord[1][2]);
+    $(".Rlose2").text(readRecord[1][3]);
+    $(".Rname3").text(readRecord[2][0]); //3つ前の結果を表示
+    $(".Rwin3").text(readRecord[2][1]); 
+    $(".Rdraw3").text(readRecord[2][2]);
+    $(".Rlose3").text(readRecord[2][3]);
+    $(".Rname4").text(readRecord[3][0]); //４つ前の結果を表示
+    $(".Rwin4").text(readRecord[3][1]); 
+    $(".Rdraw4").text(readRecord[3][2]);
+    $(".Rlose4").text(readRecord[3][3]);
+
+    </script>
+</body>
+</html>

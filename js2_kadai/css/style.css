@@ -1,0 +1,377 @@
+* {
+    box-sizing: border-box;
+}
+body,button{
+    font-family: "Lucida Grande","Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3","游ゴシック","Yu Gothic",sans-serif;
+}
+body{
+    background:linear-gradient(180deg,
+         rgba(0, 0, 0, 0.4) 50%,
+         rgba(0, 0, 0, 0.4) 50% ),
+         url(../img/back.jpg);
+    background-size: cover;
+}
+
+/* top */
+#top{
+    text-align: center;
+}
+h1{
+    height: 80px;
+    width: auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.logo-img{
+    height: 100%;
+}
+#start{
+    height: 60px;
+    width: 60px;
+    background: none;
+    border: none;
+}
+#start:hover{
+    opacity: 0.7;
+}
+#start:active{
+    background: none;
+    box-shadow:none;
+}
+.start-btn{
+    text-align: center;
+    height: 100%;
+    background: none;
+    color: none;
+}
+.start-btn:active{
+    margin-top: 2px;
+    margin-bottom: -0.5px;
+    height: 98%;
+}
+
+/* main */
+p{
+    display: none;
+    align-items: center;
+    font-weight: bold;
+}
+.text{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+#main{
+    display: flex;
+}
+
+/* score-area */
+#score-area{
+    width: 250px;
+    height: 460px;
+    margin: 10px 25px 0 25px;
+    border: 1px solid gray; 
+    border-radius: 40px;
+    background-color: rgba(255,255,255,0.8);
+}
+.name-head{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding: 30px 0 10px;
+    opacity: unset;
+}
+.name-head-a{
+    background-color: darkblue;
+    padding: 5px 20px;
+    border-radius: 15px;
+    color: white;
+}
+.input-container{
+    padding-top: 5px;
+    text-align: center;
+}
+input[type="text"]{
+    width: 190px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid lightblue; 
+    border-radius: 5px;
+    opacity: unset;
+}
+input:focus{
+    appearance: none;
+    outline: none;
+    box-shadow: 0 0 0 3px orange;
+    border-radius: 5px;
+    border: 1px solid white; 
+}
+.attack-count-head{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding: 30px 0 10px;
+    opacity: unset;
+}
+.attack-count-head-a{
+    background-color: darkblue;
+    padding: 5px 20px;
+    border-radius: 15px;
+    color: white;
+}
+.attack-count-text{
+    font-weight: bold;
+    font-size: 25px;
+    padding: 5px 0px 5px 55px;
+    opacity: unset;
+    letter-spacing: -2px;
+}
+.score-head{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px 0 10px;
+    opacity: unset;
+}
+.score-head-a{
+    background-color: darkblue;
+    padding: 5px 20px;
+    border-radius: 15px;
+    color: white;
+}
+.score{
+    font-weight: bold;
+    font-size: 25px;
+    padding: 5px 0px 5px 55px;
+    opacity: unset;
+    letter-spacing: -2px;
+}
+.win-color{
+    color: royalblue;
+}
+.draw-color{
+    color: forestgreen;
+}
+.lose-color{
+    color: crimson;
+}
+
+/* battle-area */
+#battle-area{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.battle-container{
+    padding-top: 10px;
+    margin: 0 20px 20px 20px;
+    width: 900px;
+    height: 460px;
+    border: 1px solid gray; 
+    border-radius: 40px;
+    background-color: rgba(255,255,255,0.9);
+}
+.opponent-area{
+    height: 160px;
+}
+.opponent-img{
+    padding-top: 20px;
+    margin: 0 auto;
+    height: 100px;
+    width: 100px;
+    background-color: lightcoral;
+    border-radius: 50%;
+}
+.Oimg{
+    max-height: 100%;
+}
+.Otext{
+    background-color: lightcoral;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+.Omaker,.Pmaker{
+    background: linear-gradient(transparent 70%, #FFFF00 0%);
+}
+.opponent-choice{
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.vs-area{
+    height: 22.5px;
+    margin: 20px 0;
+}
+.vs{
+    height: 22.5px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.vs-img{
+    height: 100%;
+}
+.player-area{
+    height: 221px;
+    display: flex;
+    flex-flow: column;
+    -webkit-box-pack:justify;
+    -ms-flex-pack:justify;
+    justify-content:space-between;
+}
+.player-result-container{
+    flex-flow: column;
+}
+.Ptext{
+    background-color: lightskyblue;
+    border-radius: 20px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+.player-choice{
+    padding: 8px 0;
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+.player-result{
+    padding: 7px 0;
+    margin: 0;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.janken-container{
+    text-align: center;
+    margin: 0;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+}
+ul{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+li{
+    flex:0 0 20%;
+}
+.janken{
+    height: 100px;
+    width: 100px;
+    margin: 10px 20px;
+    border-radius: 50%;
+    background-color: lightskyblue;
+    display: none;
+    box-shadow: 4px 4px 4px navy;
+}
+.janken:hover{
+    opacity: 0.8;
+}
+.janken:active{
+    box-shadow:none;
+    margin-top: 12px;
+}
+.Ppokemon-img{
+    margin: auto;
+    max-width: 100%;
+}
+
+/* record-area */
+#record-area{
+    width: 250px;
+    height: 460px;
+    margin: 10px 25px 0 25px;
+    border: 1px solid gray; 
+    border-radius: 40px;
+    background-color: rgba(255,255,255,0.8);
+}
+.record-container{
+    width: 220px;
+    padding: 5px 0;
+    margin: 0 auto;
+}
+.record-head{
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 25px 0 0;
+    opacity: unset;
+}
+.record-head-a{
+    background-color: green;
+    padding: 0px 20px;
+    border-radius: 15px;
+    color: white;
+}
+.record-name{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding: 0px 0px 0px 5px;
+    opacity: unset;
+}
+.record-point-container{
+    display: flex;
+    justify-content: center;
+}
+.record-point{
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 5px 0 5px;
+}
+.rpd{
+    letter-spacing: -2px;
+}
+
+/* bottom-area */
+#bottom{
+    text-align: center;
+}
+#change{
+    line-height: 40px;
+    padding: 0 50px;
+    border-radius:40px;
+    box-shadow: 0px 3px 0px gray;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #EA5455;
+}
+#change:hover{
+    background: linear-gradient(135deg, #FEB692 10%, #EA5455 100%);
+}
+#change:active{
+    background: none;
+    background: linear-gradient(135deg, #FEB692 10%, #EA5455 100%);
+    box-shadow:none;
+    margin-top: 2px;
+    margin-bottom: -2px;
+}
+.finish{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+}
+.finish-a{
+    background: linear-gradient(135deg, gold 10%, orangered 100%);
+    padding: 10px 50px;
+    border-radius: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px orangered;
+}
