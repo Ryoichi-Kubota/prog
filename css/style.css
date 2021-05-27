@@ -1,0 +1,281 @@
+* {
+    box-sizing: border-box;
+}
+
+/* zukan-page */
+.zukan-page{
+    font-family: "Lucida Grande","Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3","游ゴシック","Yu Gothic",sans-serif;
+    font-weight: bold;
+    color: #444;
+}
+
+/* zukan-output-area */
+#zukan-output-area{
+    height: 450px;
+    background-image: url("../img/nc204757.png");
+    background-size:cover;
+    display: flex;
+}
+
+.opt-img-container{
+    height: 350px;
+    width:350px;
+    margin-left: 25%;
+    margin-top: 4%;
+}
+#zkn-output-img{
+    /* width: 90%; */
+    height: 90%;
+}
+
+.opt-text-container{
+    height: 350px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content:flex-start;
+    margin-top: 3%;
+}
+.zkn-opt1-container{
+    width: 100%;
+    background-color: #2C7CFF;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+}
+.zkn-opt1-container:before{
+	background-color: #222;
+	content: '';
+	display: block;
+	transform: rotate(-65deg);
+	position: absolute;
+	bottom: -50px;
+	right: 85px;
+	width: 200px;
+	height: 200px;
+    z-index:1;
+}
+.zkn-opt1 ,.zkn-opt2{
+    line-height: 35px;
+}
+.zkn-opt-num{
+    width: 40%;
+    color: white;
+    text-align: center;
+}
+.zkn-opt-name{
+    width: 60%;
+    padding-left: 10px;
+    background-color: #222;
+    color: white;
+    z-index:2;
+}
+.zkn-opt-class{
+    width: 100%;
+    text-align: center;
+    border:1px solid #eee;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #eee;
+}
+.zkn-opt-head{
+    text-align: center;
+    border:1px solid #eee;
+    background-color: #eee;
+}
+.zkn-opt-sbox{
+    padding-left: 10px;
+    border:1px solid #eee;
+    background-color: white;
+}
+.zkn-head-type{
+    width: 40%;
+    border-bottom: 1px solid #ddd;
+}
+.zkn-opt-type{
+    width: 60%;
+}
+.zkn-head-height{
+    width: 40%;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.zkn-opt-height{
+    width: 60%;
+}
+.zkn-head-weight{
+    width: 40%;
+    border-top: 1px solid #ddd;
+}
+.zkn-opt-weight{
+    width: 60%;
+}
+.zkn-opt-desc-container{
+    width: 100%;
+    border:1px solid #eee;
+    margin-top: 10px;
+    background-color: white;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* zukan-input-area */
+.zukan-input-area{
+    height: 265px;
+    border-top: 1px solid lightblue;
+    background-color: white;
+    display: flex;
+}
+input::placeholder {
+    color: gray;
+    font-size: 12px;
+  }
+.ipt-img-container{
+    width:350px;
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ipt-text{
+    margin-top: 17px;
+}
+#zkn-ipt-img{
+    width: 80%;
+    height: 25px;
+    border-radius: initial;
+    font-size: 12px;
+    text-align: center;
+    line-height:25px ;
+    margin-top: 70px;
+}
+.ipt-text-container{
+    height: 200px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content:flex-start;
+    margin-top: 1%;
+}
+.zkn-ipt{
+    line-height: 25px;
+}
+#zkn-ipt-num{
+    width: 40%;
+    color: #222;
+    background-color: white;
+    text-align: center;
+    border-radius: initial;
+    font-size: 16px;
+}
+#zkn-ipt-name{
+    width: 60%;
+    padding-left: 10px;
+    color: #222;
+    background-color: white;
+    border-radius: initial;
+    font-size: 16px;
+    text-align: left;
+}
+#zkn-ipt-class{
+    width: 100%;
+    margin: 2.5px 0;
+    background-color: white;
+    border-radius: initial;
+    font-size: 16px;
+    text-align: center;
+}
+.zkn-ipt-head{
+    text-align: center;
+    border:1px solid #eee;
+    background-color: #eee;
+    border-radius: initial;
+    font-size: 12px;
+    line-height:25px ;
+}
+#zkn-ipt-type{
+    width: 60%;
+    border-radius: initial;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+}
+.zkn-head-height{
+    width: 40%;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+#zkn-ipt-height{
+    width: 60%;
+    border-radius: initial;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+}
+.zkn-head-weight{
+    width: 40%;
+    border-top: 1px solid #ddd;
+}
+#zkn-ipt-weight{
+    width: 60%;
+    border-radius: initial;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+}
+.zkn-ipt-desc-container{
+    width: 100%;
+    border:1px solid #eee;
+    margin-top: 2.5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+#zkn-ipt-desc1,#zkn-ipt-desc2,#zkn-ipt-desc3{
+    border-radius: initial;
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
+}
+#send{
+    margin-left: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 40px;
+    box-shadow: 0px 3px 0px grey;
+    font-weight: bold;
+    color: white;
+    background-color: #EA5455;
+    margin-top: 14.6%;
+}
+#send:active {
+    background: none;
+    background: linear-gradient(135deg, #FEB692 10%, #EA5455 100%);
+    box-shadow: none;
+    margin-top: 14.8%;
+}
+
+
+.input-container{
+    padding-top: 5px;
+    text-align: center;
+}
+input[type="text"]{
+    width: 190px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid lightblue; 
+    border-radius: 5px;
+    opacity: unset;
+}
+input:focus{
+    appearance: none;
+    outline: none;
+    box-shadow: 0 0 0 3px orange;
+    border-radius: 5px;
+    border: 1px solid white; 
+}
