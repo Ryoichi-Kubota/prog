@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+    <title>ポケモンずかんジェネレーター</title>
+    <style id='Stylesheet' type='text/css'></style>
+</head>
+<body class="zukan-page">
+    <script src="js/js.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- firebaseのバージョン -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase.js"></script>
+
+    <div id="zukan-output-area">
+        <div class="opt-img-container">
+            <img id="zkn-output-img" src="">
+        </div>
+        <div class="opt-text-container">
+            <div class="zkn-opt1 zkn-opt1-container">
+                <div class="zkn-opt1 zkn-opt-num">No.</div>
+                <div class="zkn-opt1 zkn-opt-name"></div>
+            </div>
+            <div class="zkn-opt2 zkn-opt-class"></div>
+            <div class="zkn-opt2 zkn-opt-head zkn-head-type">タイプ</div>
+            <div class="zkn-opt2 zkn-opt-sbox zkn-opt-type"></div>
+            <div class="zkn-opt2 zkn-opt-head zkn-head-height">高さ</div>
+            <div class="zkn-opt2 zkn-opt-sbox zkn-opt-height"></div>
+            <div class="zkn-opt2 zkn-opt-head zkn-head-weight">重さ</div>
+            <div class="zkn-opt2 zkn-opt-sbox zkn-opt-weight"></div>
+            <div class="zkn-opt2 zkn-opt-desc-container">
+                <div class="zkn-opt2 zkn-opt-desc zkn-opt-desc1"></div>
+                <div class="zkn-opt2 zkn-opt-desc zkn-opt-desc2"></div>
+                <div class="zkn-opt2 zkn-opt-desc zkn-opt-desc3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zukan-input-area">
+        <div class="ipt-img-container">
+            <div class="ipt-text">ポケモン図鑑自作フォーム</div>
+            <input id="zkn-ipt-img" type="text" placeholder="画像のURLを貼付">
+        </div>    
+        <div class="ipt-text-container">
+            <input class="zkn-ipt" id="zkn-ipt-num" type="text" placeholder="No.XXX　例）151">
+            <input class="zkn-ipt" id="zkn-ipt-name" type="text" placeholder="例）ピカチュウ">
+            <input class="zkn-ipt" id="zkn-ipt-class" type="text" placeholder="例）ねずみポケモン">
+            <div class="zkn-opt2 zkn-ipt-head zkn-head-type">タイプ</div>
+            <input class="zkn-ipt" id="zkn-ipt-type" type="text" placeholder="例）でんきタイプ">
+            <div class="zkn-opt2 zkn-ipt-head zkn-head-height">高さ</div>
+            <input class="zkn-ipt" id="zkn-ipt-height" type="text" placeholder="例）2 ｍ">
+            <div class="zkn-opt2 zkn-ipt-head zkn-head-weight">重さ</div>
+            <input class="zkn-ipt" id="zkn-ipt-weight" type="text" placeholder="例）100 kg">
+            <div class="zkn-ipt zkn-ipt-desc-container">
+                <input class="zkn-ipt" id="zkn-ipt-desc1" type="text" placeholder="説明文 1行目">
+                <input class="zkn-ipt" id="zkn-ipt-desc2" type="text" placeholder="説明文 2行目">
+                <input class="zkn-ipt" id="zkn-ipt-desc3" type="text" placeholder="説明文 3行目">
+            </div>
+        </div>
+        <button id="send">けってい</button>
+
+    </div>
+
+    <script>
+        // Githubには上げない！
+        var firebaseConfig = {
+            apiKey: "AIzaSyBsyXorMV_e3XTfGCJPH5NV1jX_oa9Cprw",
+            authDomain: "dev20chat-45618.firebaseapp.com",
+            databaseURL: "https://dev20chat-45618-default-rtdb.firebaseio.com/",
+            projectId: "ev20chat-45618",
+            storageBucket: "dev20chat-45618.appspot.com",
+            messagingSenderId: "1093821178212",
+            appId: "1:1093821178212:web:38b6286ce33f23cf929a71"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        //firebaseのデーターベース（保存させる場所）を使います
+        const newPostRef = firebase.database().ref();
+
+        // // この「data()」の中に今日の日付データのすべてが格納されている
+        // var now = new Date();
+        // // 西暦
+        // var yy = now.getFullYear();
+        // // 月(月のデータは「０～１１」が格納されてるので１を足してます)
+        // var mm = now.getMonth() + 1;
+        // // 日付
+        // var dd = now.getDate();
+        // // 時間
+        // var h = now.getHours();
+        // // 分数
+        // var m = now.getMinutes();
+        // // 秒数
+        // var s = now.getSeconds();
+        // // timeに現在日時を代入
+        // time = (yy+"/"+mm+"/"+dd+" "+h+":"+m+":"+s)
+
+        // 送信ボタンをクリックされたら次の処理をする
+        $("#send").on("click", function () {
+
+            let imgMust = $("#zkn-ipt-img").val();
+            let typeMust = $("#zkn-ipt-type").val();
+            if (imgMust ===""){
+                alert("必須項目が入力されていません")
+                return
+            }
+
+            newPostRef.set({
+                "users":{
+                img:$("#zkn-ipt-img").val(), //inputの値をプロパティ名を付けてdatabaseに保存
+                num:$("#zkn-ipt-num").val(), 
+                name:$("#zkn-ipt-name").val(), 
+                class:$("#zkn-ipt-class").val(), 
+                type:$("#zkn-ipt-type").val(), 
+                cm:$("#zkn-ipt-height").val(), 
+                kg:$("#zkn-ipt-weight").val(), 
+                des1:$("#zkn-ipt-desc1").val(), 
+                des2:$("#zkn-ipt-desc2").val(),
+                des3:$("#zkn-ipt-desc3").val(),
+                }
+            })
+        });
+
+        // 受信処理
+        newPostRef.on("child_added", function (data) {
+            let v = data.val(); //databaseの全てのデータを取得
+            let im = `${v.img}`; //変数にプロパティ名に対応する値を代入
+            let no = `${v.num}`;
+            let na = `${v.name}`;
+            let cl = `${v.class}`;
+            let ty = `${v.type}`;
+            let hi = `${v.cm}`;
+            let wi = `${v.kg}`;
+            let de1 = `${v.des1}`;
+            let de2 = `${v.des2}`;
+            let de3 = `${v.des3}`;
+
+            $('#zkn-output-img').attr('src', im); //imgタグのsrcに画像URLを表示
+            $(".zkn-opt-num").append(no); //表示エリアに各変数の値を表示
+            $(".zkn-opt-name").append(na);
+            $(".zkn-opt-class").append(cl);
+            $(".zkn-opt-type").append(ty);
+            $(".zkn-opt-height").append(hi);
+            $(".zkn-opt-weight").append(wi);
+            $(".zkn-opt-desc1").append(de1);
+            $(".zkn-opt-desc2").append(de2);
+            $(".zkn-opt-desc3").append(de3);
+        });
+            
+    </script>
+</body>
+</html>
