@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+    <title>Dashboard</title>
+    <style id='Stylesheet' type='text/css'></style>
+</head>
+<body>
+    <!-- <script src="js/js.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- firebaseのバージョン -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase.js"></script>
+
+    <main id="main">
+        <!-- 時計 -->
+        <div id="clock">
+            <div id="calendar"></div>
+            <div id="time"></div>
+        </div>
+
+        <!-- ニュース -->
+        <div id="news">
+            <div class="news-header">News</div>
+            <div class="articles-box">
+                <a id="article1" class="articles"></a><br>
+                <a id="article2" class="articles"></a><br>
+                <a id="article3" class="articles"></a><br>
+                <a id="article4" class="articles"></a><br>
+                <a id="article5" class="articles"></a><br>
+            </div>
+        </div>
+
+        <!-- 天気 -->
+        <div id="weather">
+            <div class="weather-box1">
+                <div class="weather-header"><a target="_blank" href="https://weather.yahoo.co.jp/weather/13/4410/13121.html">rainfall forecast</a></div>
+                <div id="update-time"></div>
+            </div>
+            <div class="weather-box2">
+                <div class="rain-box rain-box1">
+                    <p class="forecast">now</p>
+                    <div>
+                        <a class="icon"><img id="img0" src=""></a><br>
+                        <a id="rain0" class="rain"></a>
+                        <a class="unit">mm/h</a>
+                    </div>
+                </div>    
+                <div class="rain-box rain-box2">
+                    <p class="forecast">in30min</p>
+                    <div>
+                        <a class="icon"><img id="img3" src=""></a><br>
+                        <a id="rain3" class="rain"></a>
+                        <a class="unit">mm/h</a>
+                    </div>
+                </div>    
+                <div class="rain-box rain-box3">
+                    <p class="forecast">in60min</p>
+                    <div>
+                        <a class="icon"><img id="img6" src=""></a><br>
+                        <a id="rain6" class="rain"></a>
+                        <a class="unit">mm/h</a>
+                    </div>
+                </div>   
+            </div>
+        </div>
+
+        <!-- 野球情報 --> 
+        <div id="mlb">
+            <div class="mlb-box1">
+                <div class="mlb-header"><a target="_blank" href="https://www.mlb.com/player/shohei-ohtani-660271">Shohei Ohtani #17</a></div>
+                <div class="Ystats">2021 Status</div>
+            </div>    
+            <div class="mlb-box2">
+                <div class="stats batter">
+                    <div class="stats-header">Batting</div>
+                    <div class="stats-box">
+                        <p>AVG</p><span class="mlb-span"></span><p id="avg"></p><span class="mlb-span-end"></span>
+                        <p>HR</p><span class="mlb-span"></span><p id="hr"></p><span class="mlb-span-end"></span>
+                        <p>RBI</p><span class="mlb-span"></span><p id="rbi"></p><span class="mlb-span-end"></span>
+                        <p>SB</p><span class="mlb-span"></span><p id="sb"></p><span class="mlb-span-end"></span>
+
+                </div>
+                <div class="stats pitcher">
+                    <div class="stats-header ">Pitching</div>
+                    <div class="stats-box">
+                        <p>ERA</p><span class="mlb-span"></span><p id="era"></p><span class="mlb-span-end"></span>
+                        <p>W</p><span class="mlb-span"></span><p id="w"></p><span class="mlb-span-end"></span>
+                        <p>L</p><span class="mlb-span"></span><p id="l"></p><span class="mlb-span-end"></span>
+                        <p>SO</p><span class="mlb-span"></span><p id="so"></p><span class="mlb-span-end"></span>
+                    </div>
+                </div>
+            </div>    
+        </div>
+
+    </main>
+
+    <script  type="text/javascript">
+
+        // 時計：現在時刻を表示
+        function showtime() {
+            var today = new Date();
+            $weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            $month = ['Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'];
+            year = today.getFullYear();
+            $('#calendar').html(
+                "<span>" + $weekday[today.getDay()] +"</span>"
+                + "<span>" + $month[today.getMonth()] +"</span>"
+                + "<span>" + [today.getDay()] +"</span>"
+                + "<span>" + year +"</span>");
+            $('#time').html(
+            today.getHours() + ":" 
+            + ('0' 
+            + today.getMinutes()).slice(-2) + ":" 
+            + ('0' + today.getSeconds()).slice(-2));
+            }
+        setInterval(showtime, 1000);
+
+        // 野球情報：MLB-API 大谷翔平成績
+        const batting = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='R'&season='2021'&player_id='660271'",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "", //apiキーは入れない
+                "x-rapidapi-host": "mlb-data.p.rapidapi.com"
+            }
+        };
+        $.ajax(batting).done(function (response) {
+            console.log(response);
+            var AVG = response.sport_hitting_tm.queryResults.row.avg;
+            var HR = response.sport_hitting_tm.queryResults.row.hr;
+            var RBI = response.sport_hitting_tm.queryResults.row.rbi;
+            var SB = response.sport_hitting_tm.queryResults.row.sb;
+            $("#avg").html(AVG);
+            $("#hr").html(HR);
+            $("#rbi").html(RBI);
+            $("#sb").html(SB);
+        });
+        // 野球情報：MLB-API 大谷翔平 投手
+        const pitching = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://mlb-data.p.rapidapi.com/json/named.sport_pitching_tm.bam?season='2021'&player_id='660271'&league_list_id='mlb'&game_type='R'",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "", //apiキーは入れない
+                "x-rapidapi-host": "mlb-data.p.rapidapi.com"
+            }
+        };
+        $.ajax(pitching).done(function (response) {
+            console.log(response);
+            var W = response.sport_pitching_tm.queryResults.row.w;
+            var L = response.sport_pitching_tm.queryResults.row.l;
+            var ERA = response.sport_pitching_tm.queryResults.row.era;
+            var SO = response.sport_pitching_tm.queryResults.row.so;
+            $("#w").html(W);
+            $("#l").html(L);
+            $("#era").html(ERA);
+            $("#so").html(SO);
+        });
+
+        // 天気：Yahoo天気API
+        var appid = ""; //apiキーは入れない
+        var coordinates = "139.789021,35.776265"; //オフィスの経度緯度
+        // 35.776265,139.789021
+        $.getJSON("https://map.yahooapis.jp/weather/V1/place?coordinates="+coordinates+"&output=json&appid="+appid,function(data){
+            console.dir(data);
+            var d = data.Feature[0].Property.WeatherList.Weather[0].Date; //時間を取得
+            var updateHh = d.substr( 8, 2 ); //HHを抜き取り
+            var updateMi = d.substr( 10, 2 ); //MMを抜き取り
+            var r0 = data.Feature[0].Property.WeatherList.Weather[0].Rainfall; //現在の降水強度実測
+            var r3 = data.Feature[0].Property.WeatherList.Weather[3].Rainfall; //30分後の降水強度予測
+            var r6 = data.Feature[0].Property.WeatherList.Weather[6].Rainfall; //60分後の降水強度予測
+            $("#update-time").html("Update " + updateHh +":"+ updateMi); //HTMLに追加
+            $("#rain0").html(r0);
+            $("#rain3").html(r3);
+            $("#rain6").html(r6);
+            let Rain0 = document.getElementById("img0");
+            let Rain3 = document.getElementById("img3");
+            let Rain6 = document.getElementById("img6");
+            if (r0 == 0){
+                Rain0.setAttribute("src", "img/weather.svg")
+            }else if(r0 > 0 && r0 < 10){
+                Rain0.setAttribute("src", "img/rain.svg")
+            }else if(r0 >= 10){
+                Rain0.setAttribute("src", "img/heavyRain.svg")
+            }
+            if (r3 == 0){
+                Rain3.setAttribute("src", "img/weather.svg")
+            }else if(r3 > 0 && r3 < 10){
+                Rain3.setAttribute("src", "img/rain.svg")
+            }else if(r3 >= 10){
+                Rain3.setAttribute("src", "img/heavyRain.svg")
+            }
+            if (r6 == 0){
+                Rain6.setAttribute("src", "img/weather.svg")
+            }else if(r6 > 0 && r6 < 10){
+                Rain6.setAttribute("src", "img/rain.svg")
+            }else if(r6 >= 10){
+                Rain6.setAttribute("src", "img/heavyRain.svg")
+            }
+        });
+
+        // ニュース：ニュースAPI
+        const settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://google-news.p.rapidapi.com/v1/topic_headlines?lang=en&country=US&topic=technology",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "", //apiキーは入れない
+                "x-rapidapi-host": "google-news.p.rapidapi.com"
+            }
+        };
+        $.ajax(settings).done(function (res) {
+            console.log(res);
+            var a0 = res.articles[0].title;
+            var a1 = res.articles[1].title;
+            var a2 = res.articles[2].title;
+            var a3 = res.articles[3].title;
+            var a4 = res.articles[4].title;
+            $("#article1").html(a0);
+            $("#article2").html(a1);
+            $("#article3").html(a2);
+            $("#article4").html(a3);
+            $("#article5").html(a4);
+            let link0 = document.getElementById("article1");
+            link0.setAttribute("href",res.articles[0].link)
+            link0.setAttribute("target","_blank")
+            let link1 = document.getElementById("article2");
+            link1.setAttribute("href",res.articles[0].link)
+            link1.setAttribute("target","_blank")
+            let link2 = document.getElementById("article3");
+            link2.setAttribute("href",res.articles[0].link)
+            link2.setAttribute("target","_blank")
+            let link3 = document.getElementById("article4");
+            link3.setAttribute("href",res.articles[0].link)
+            link3.setAttribute("target","_blank")
+            let link4 = document.getElementById("article5");
+            link4.setAttribute("href",res.articles[0].link)
+            link4.setAttribute("target","_blank")
+        });
+
+    </script>
+    
+</body>
+</html>
