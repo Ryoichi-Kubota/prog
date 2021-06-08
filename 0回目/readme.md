@@ -10,6 +10,9 @@
 
 ④その他（感想、シェアしたいことなんでも）  
 ・思うようにいかないことの方が多かったが、成果がすぐに確認できたので時間を忘れて夢中に書いていました。  
-
+  
 ![image](https://user-images.githubusercontent.com/81688850/121206289-4e1a9c00-c8b3-11eb-984a-27f4810e59fd.png)
+  
+  
+![image](https://user-images.githubusercontent.com/81688850/121206523-802bfe00-c8b3-11eb-88fc-c2c50ee7dc50.png)
 
