@@ -15,3 +15,5 @@
   
 その他（感想、シェアしたいことなんでも）  
 ・保存したデータを指定して取り出す方法を調べるのに苦労しました。  
+
+![image](https://user-images.githubusercontent.com/81688850/121208250-e2d1c980-c8b4-11eb-8fc8-706b275561ae.png)
