@@ -21,3 +21,5 @@
   
 その他（感想、シェアしたいことなんでも）  
 ・配列に苦戦しましたが、イメージ通りの動きになりました。  
+
+![image](https://user-images.githubusercontent.com/81688850/121208135-cc2b7280-c8b4-11eb-9c41-e58fd9c858ad.png)
