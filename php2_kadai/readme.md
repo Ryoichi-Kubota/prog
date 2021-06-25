@@ -16,3 +16,8 @@
 
 その他（感想、シェアしたいことなんでも）
 ・SQLが一番難しく感じた
+
+![image](https://user-images.githubusercontent.com/81688850/123488436-ee5e1800-d64a-11eb-9933-eb048b5c1837.png)
+
+![image](https://user-images.githubusercontent.com/81688850/123488470-fae27080-d64a-11eb-952c-9dd05f732867.png)
+
