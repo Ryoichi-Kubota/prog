@@ -133,6 +133,8 @@
             <div class="wrapper-title">
               <p class="text-head">会員管理</p>
             </div>
+            <!-- CSVダウンロード -->
+            <button type="button" class="btn btn-gray" onclick="location.href='download.php'">CSV出力</button>
             <!-- 検索フォーム -->
             <form class="serch-box" action="select.php" method="GET">
               <input type="text" name="id" class="" placeholder="会員ID検索">
