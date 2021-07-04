@@ -44,4 +44,10 @@ CSVダウンロード機能
   
 ↓削除ポップアップ  
 ![image](https://user-images.githubusercontent.com/81688850/124151962-0bbd3700-dace-11eb-9fda-517f40b51ebe.png)
+　　
+↓CSVダウンロード機能（2021-07-04追加）  
+![image](https://user-images.githubusercontent.com/81688850/124372509-4d640280-dcc5-11eb-9fae-285609322dce.png)  
+  
+↓ダウンロードしたCSV  
+![image](https://user-images.githubusercontent.com/81688850/124372522-68367700-dcc5-11eb-8d61-16016f17c1ab.png)  
 
